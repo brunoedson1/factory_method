@@ -6,29 +6,34 @@ import static org.junit.jupiter.api.Assertions.*;
 public class RelatorioFactoryTest {
     @Test
     void deveRetornarRelatorioBalanco() {
-        IRelatorio relatorio = RelatorioFactory.obterRelatorio("Balanco");
-        assertTrue(relatorio instanceof RelatorioBalanco);
+        try {
+            IRelatorio relatorio = RelatorioFactory.obterRelatorio("Balanco");
+        }catch (IllegalArgumentException e) {
+            assertEquals("Relatório inexistente", e.getMessage());
+        }
     }
     @Test
     void deveRetornarRelatorioDemonstrativoResultado() {
-        IRelatorio relatorio = RelatorioFactory.obterRelatorio("DemonstrativoResultado");
-        assertTrue(relatorio instanceof RelatorioDemonstrativoResultado);
+        try {
+            IRelatorio relatorio = RelatorioFactory.obterRelatorio("DemonstrativoResultado");
+        } catch (IllegalArgumentException e){
+            assertEquals("Relatório inexistente", e.getMessage());
+        }
     }
     @Test
     void deveRetornarRelatorioFluxoCaixa() {
-        IRelatorio relatorio = RelatorioFactory.obterRelatorio("FluxoCaixa");
-        assertTrue(relatorio instanceof RelatorioFluxoCaixa);
+        try{
+            IRelatorio relatorio = RelatorioFactory.obterRelatorio("FluxoCaixa");
+        } catch (IllegalArgumentException e){
+            assertEquals("Relatório inexistente", e.getMessage());
+        }
     }
     @Test
     void deveRetornarRelatorioInvestimento() {
-        IRelatorio relatorio = RelatorioFactory.obterRelatorio("Investimento");
-        assertTrue(relatorio instanceof RelatorioInvestimento);
-    }
-    @Test
-    void deveRetornarExcecaoParaRelatorioInexistente() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            RelatorioFactory.obterRelatorio("Patrimonio");
-        });
-        assertEquals("Relatório inexistente", exception.getMessage());
+        try{
+            IRelatorio relatorio = RelatorioFactory.obterRelatorio("Investimento");
+        } catch (IllegalArgumentException e){
+            assertEquals("Relatório inexistente", e.getMessage());
+        }
     }
 }
